@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国兴集团统一门户</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fa-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .rounded-button {
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        /* 强制隐藏tab内容 - 使用更高优先级 */
+        .tab-content {
+            display: none !important;
+        }
+        .tab-content.active {
+            display: grid !important;
+        }
+        .active-tab {
+            background-color: #2563eb !important;
+            color: white !important;
+        }
+        /* 确保非激活按钮的样式 */
+        .tab-button:not(.active-tab) {
+            background-color: #f3f4f6 !important;
+            color: #374151 !important;
+        }
+        .tab-button:not(.active-tab):hover {
+            background-color: #e5e7eb !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white text-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <div class="text-xl font-bold">国兴集团</div>
+
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">统一门户</a>
+                    <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">数据分析</a>
+                    <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">应用管理</a>
+                    <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">信息管理</a>
+                    <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">系统管理</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fas fa-bell fa-icon text-gray-600 hover:text-gray-800 cursor-pointer"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">张</div>
+                    <span class="hidden md:inline text-gray-800">张明远</span>
+                    <i class="fas fa-chevron-down fa-icon text-sm text-gray-600"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 主内容区 - 6:4布局 -->
+    <main class="pt-16 pb-8 container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- 左侧面板 - 60% -->
+            <div class="w-full lg:w-[60%] flex-shrink-0 space-y-6">
+                <!-- 第一行：待办卡片和待处理列表 -->
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <!-- 待办数据卡片 -->
+                    <div class="w-full lg:w-1/3 bg-white rounded-xl shadow-sm p-4">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">2025年7月29日 星期二</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <div class="text-sm text-gray-500 mb-1">今日待办</div>
+                                <div class="text-2xl font-bold text-blue-600">27</div>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <div class="text-sm text-gray-500 mb-1">我发起的</div>
+                                <div class="text-2xl font-bold text-purple-600">9</div>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <div class="text-sm text-gray-500 mb-1">已审批</div>
+                                <div class="text-2xl font-bold text-green-600">45</div>
+                            </div>
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <div class="text-sm text-gray-500 mb-1">我的关注</div>
+                                <div class="text-2xl font-bold text-yellow-600">33</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 待处理事项列表 -->
+                    <div class="w-full lg:w-2/3 bg-white rounded-xl shadow-sm p-6">
+                        <div class="border-b border-gray-200 mb-6">
+                            <nav class="flex -mb-px space-x-8">
+                                <button class="px-1 py-4 border-b-2 border-blue-600 text-blue-600 font-medium text-sm">待我处理</button>
+                                <button class="px-1 py-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 text-sm">我发起的</button>
+                                <button class="px-1 py-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 text-sm">抄送我的</button>
+                                <button class="px-1 py-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 text-sm">我的办结</button>
+                                <button class="px-1 py-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 text-sm">我的关注</button>
+                            </nav>
+                        </div>
+                        
+                        <!-- 表头 - 调整了列宽和间距 -->
+                        <div class="grid grid-cols-12 gap-2 text-sm text-gray-500 font-medium mb-4">
+                            <div class="col-span-1"></div>
+                            <div class="col-span-6">事项名称</div>
+                            <div class="col-span-2">日期</div>
+                            <div class="col-span-2">发起人</div>
+                            <div class="col-span-1">操作</div>
+                        </div>
+                        
+                        <!-- 事项列表 -->
+                        <div class="space-y-4">
+                            <!-- 第一条 -->
+                            <div class="grid grid-cols-12 gap-2 items-center p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="col-span-1">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                </div>
+                                <div class="col-span-6 text-sm font-medium truncate">2025年度预算调整申请</div>
+                                <div class="col-span-2 text-xs text-gray-500">2025-07-29 10:30</div>
+                                <div class="col-span-2 text-xs text-gray-500">林文静</div>
+                                <div class="col-span-1 flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">审批</button>
+                                    <button class="text-gray-600 hover:text-gray-800 text-sm">详情</button>
+                                </div>
+                            </div>
+                            
+                            <!-- 第二条 -->
+                            <div class="grid grid-cols-12 gap-2 items-center p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="col-span-1">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                </div>
+                                <div class="col-span-6 text-sm font-medium truncate">智慧工地系统升级方案评审</div>
+                                <div class="col-span-2 text-xs text-gray-500">2025-07-28 15:45</div>
+                                <div class="col-span-2 text-xs text-gray-500">郑海涛</div>
+                                <div class="col-span-1 flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">审批</button>
+                                    <button class="text-gray-600 hover:text-gray-800 text-sm">详情</button>
+                                </div>
+                            </div>
+                            
+                            <!-- 第三条 -->
+                            <div class="grid grid-cols-12 gap-2 items-center p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="col-span-1">
+                                    <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                                </div>
+                                <div class="col-span-6 text-sm font-medium truncate">新项目立项审批流程</div>
+                                <div class="col-span-2 text-xs text-gray-500">2025-07-28 09:15</div>
+                                <div class="col-span-2 text-xs text-gray-500">刘建华</div>
+                                <div class="col-span-1 flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">审批</button>
+                                    <button class="text-gray-600 hover:text-gray-800 text-sm">详情</button>
+                                </div>
+                            </div>
+                            
+                            <!-- 第四条 -->
+                            <div class="grid grid-cols-12 gap-2 items-center p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="col-span-1">
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="col-span-6 text-sm font-medium truncate">设备采购合同审核</div>
+                                <div class="col-span-2 text-xs text-gray-500">2025-07-27 16:20</div>
+                                <div class="col-span-2 text-xs text-gray-500">周思敏</div>
+                                <div class="col-span-1 flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">审批</button>
+                                    <button class="text-gray-600 hover:text-gray-800 text-sm">详情</button>
+                                </div>
+                            </div>
+                            
+                            <!-- 第五条 -->
+                            <div class="grid grid-cols-12 gap-2 items-center p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="col-span-1">
+                                    <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+                                </div>
+                                <div class="col-span-6 text-sm font-medium truncate">安全生产月度总结报告</div>
+                                <div class="col-span-2 text-xs text-gray-500">2025-07-27 14:05</div>
+                                <div class="col-span-2 text-xs text-gray-500">杨晓明</div>
+                                <div class="col-span-1 flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">审批</button>
+                                    <button class="text-gray-600 hover:text-gray-800 text-sm">详情</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第二行：快捷入口 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">快捷入口</h3>
+                        <a href="#" class="text-sm text-blue-600 hover:underline flex items-center">
+                            更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3">
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-umbrella-beach fa-icon"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">请假审批</span>
+                        </button>
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-hand-holding-usd text-primary"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">保证金审批</span>
+                        </button>
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-file-upload text-primary"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">文件发布</span>
+                        </button>
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-file-signature text-primary"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">合同签约</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 第三行：公告 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">公告</h3>
+                        <a href="#" class="text-sm text-blue-600 hover:underline flex items-center">
+                            更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-lg hover:bg-blue-100 cursor-pointer">
+                            <div class="text-sm font-medium text-gray-800">系统升级通知</div>
+                            <div class="text-xs text-gray-500 mt-1">2023-06-15</div>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg hover:bg-blue-100 cursor-pointer">
+                            <div class="text-sm font-medium text-gray-800">端午节放假安排</div>
+                            <div class="text-xs text-gray-500 mt-1">2023-06-10</div>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg hover:bg-blue-100 cursor-pointer">
+                            <div class="text-sm font-medium text-gray-800">年度绩效考核通知</div>
+                            <div class="text-xs text-gray-500 mt-1">2023-05-20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧面板 - 40% -->
+            <div class="w-full lg:w-[40%] flex-shrink-0 space-y-6">
+                <!-- 上部分：可切换的卡片区域 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-6 flex-wrap">
+                        <h2 class="text-xl font-semibold text-gray-800 whitespace-nowrap">业务管理</h2>
+                        <div class="flex space-x-1 mt-2 sm:mt-0 overflow-x-auto whitespace-nowrap">
+                            <button class="px-3 py-1 rounded-button text-sm tab-button active-tab" data-tab="investment">投资管理</button>
+                            <button class="px-3 py-1 rounded-button text-sm tab-button" data-tab="finance">融资管理</button>
+                            <button class="px-3 py-1 rounded-button text-sm tab-button" data-tab="construction">工程建设</button>
+                            <button class="px-3 py-1 rounded-button text-sm tab-button" data-tab="management">综合管理</button>
+                            <button class="px-3 py-1 rounded-button text-sm tab-button" data-tab="operation">经营管理</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 投资管理卡片内容 -->
+                    <div class="tab-content grid grid-cols-2 gap-4" id="investment-tab">
+                        <div class="bg-blue-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-keyboard text-primary"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">投资录入</h3>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-landmark fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">产权维护</h3>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-project-diagram fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">项目库</h3>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-chart-line fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">数据统计</h3>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-tachometer-alt fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">数据看板</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 融资管理卡片内容 -->
+                    <div class="tab-content grid grid-cols-2 gap-4" id="finance-tab">
+                        <div class="bg-blue-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-wallet fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">资金余额</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">查看当前资金余额情况</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-hand-holding-usd fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">融资放款</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">融资放款记录管理</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-book fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">融资台账</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">融资项目台账管理</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-calendar-alt fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">本月融资</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">本月融资情况汇总</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 工程建设卡片内容 -->
+                    <div class="tab-content grid grid-cols-2 gap-4" id="construction-tab">
+                        <div class="bg-blue-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-project-diagram fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">流程管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">工程建设项目流程管理</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-hard-hat fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">现场管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">工程现场施工管理</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-video fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">工地监控</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">工地实时监控查看</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-tachometer-alt fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">数据看板</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">工程建设数据可视化</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-file-invoice-dollar fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">工程结算审计</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">工程结算与审计管理</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-tasks fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">进度管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">工程项目进度跟踪</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 综合管理卡片内容 -->
+                    <div class="tab-content grid grid-cols-2 gap-4" id="management-tab">
+                        <div class="bg-blue-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-exclamation-triangle fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">应急管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">应急事件处理与管理</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-users fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">人资管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">人力资源与组织管理</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-flag fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">党群管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">党群工作管理</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-sitemap fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">流程管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">综合业务流程管理</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-gavel fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">纪委管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">纪检监察工作管理</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-balance-scale fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">审计法务</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">审计与法务工作管理</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 经营管理卡片内容 -->
+                    <div class="tab-content grid grid-cols-2 gap-4" id="operation-tab">
+                        <div class="bg-blue-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-map-marked-alt fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">土地经营</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">土地资源经营管理</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-building fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">资产经营</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">固定资产经营管理</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-chart-pie fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">经营管理</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">经营业务综合管理</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-database fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">数据运营</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">经营数据运营分析</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-star fa-icon"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-800">经营评价</h3>
+                            </div>
+                            <p class="text-sm text-gray-600">经营绩效评价分析</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 下部分：我的应用 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">我的应用</h3>
+                        <a href="#" class="text-sm text-blue-600 hover:underline flex items-center">
+                            更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4">
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-shield-alt fa-icon"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">安管通</span>
+                        </button>
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-hard-hat fa-icon"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">智慧工地</span>
+                        </button>
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-desktop fa-icon"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">OA系统</span>
+                        </button>
+                        <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-2">
+                                <i class="fas fa-map-marked-alt fa-icon"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">土地管理</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 完全重新设计的JavaScript解决方案
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('页面加载完成，开始初始化tab功能');
+            
+            // 获取所有tab按钮和内容
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            console.log('找到', tabButtons.length, '个tab按钮');
+            console.log('找到', tabContents.length, '个tab内容');
+            
+            // 初始化：强制隐藏所有tab内容
+            tabContents.forEach((content, index) => {
+                content.style.display = 'none';
+                content.classList.remove('active');
+                console.log('隐藏tab内容', index, content.id);
+            });
+            
+            // 显示默认的第一个tab（投资管理）
+            const defaultTab = document.getElementById('investment-tab');
+            if (defaultTab) {
+                defaultTab.style.display = 'grid';
+                defaultTab.classList.add('active');
+                console.log('显示默认tab: investment-tab');
+            }
+            
+            // 为每个tab按钮添加点击事件
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    console.log('点击了tab按钮:', this.getAttribute('data-tab'));
+                    
+                    // 移除所有按钮的active类
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active-tab');
+                        btn.style.backgroundColor = '#f3f4f6';
+                        btn.style.color = '#374151';
+                    });
+                    
+                    // 给当前按钮添加active类和样式
+                    this.classList.add('active-tab');
+                    this.style.backgroundColor = '#2563eb';
+                    this.style.color = 'white';
+                    
+                    // 隐藏所有内容
+                    tabContents.forEach(content => {
+                        content.style.display = 'none';
+                        content.classList.remove('active');
+                    });
+                    
+                    // 显示当前内容
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    const targetTab = document.getElementById(tabId);
+                    if (targetTab) {
+                        targetTab.style.display = 'grid';
+                        targetTab.classList.add('active');
+                        console.log('显示tab内容:', tabId);
+                    } else {
+                        console.error('找不到目标tab:', tabId);
+                    }
+                });
+            });
+            
+            console.log('Tab功能初始化完成');
+        });
+    </script>
+</body>
+</html>
+

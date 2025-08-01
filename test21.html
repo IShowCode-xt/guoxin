@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国兴集团统一门户</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1E88E5',
+        secondary: '#42A5F5',
+        appBlue: '#E3F2FD', // 新增淡蓝色
+      },
+      borderRadius: {
+        'none': '0px',
+        'sm': '2px',
+        DEFAULT: '4px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '20px',
+        '3xl': '24px',
+        'full': '9999px',
+        'button': '4px'
+      }
+    }
+  }
+}
+</script>
+<style>
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+  .icon-btn {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover {
+    background-color: #E3F2FD;
+  }
+  .icon-btn i {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .nav-item {
+    position: relative;
+  }
+  .nav-item:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #1E88E5;
+  }
+  .module-title {
+    position: relative;
+    padding-left: 12px;
+  }
+  .module-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    height: 16px;
+    width: 4px;
+    background-color: #1E88E5;
+    border-radius: 2px;
+  }
+  /* 待办入口样式 */
+  .todo-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid rgba(30, 136, 229, 0.2);
+  }
+  .todo-item:hover {
+    background-color: #E3F2FD;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(30, 136, 229, 0.1);
+    border-color: rgba(30, 136, 229, 0.4);
+  }
+  .todo-item .count {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1E88E5;
+    margin-bottom: 4px;
+  }
+  .todo-item .label {
+    font-size: 12px;
+    color: #666;
+  }
+  /* 流程中心按钮样式 */
+  .flow-center-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1E88E5;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-top: 12px;
+    transition: all 0.2s;
+  }
+  .flow-center-btn:hover {
+    background-color: #1976D2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .flow-center-btn i {
+    margin-right: 6px;
+    font-size: 14px;
+  }
+  /* 我的应用模块标题样式 */
+  .my-apps-title {
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    border-left: 4px solid #1E88E5;
+  }
+  .my-apps-title i {
+    color: #1E88E5;
+    margin-right: 8px;
+    font-size: 18px;
+  }
+  /* 我的应用图标按钮样式 */
+  .app-icon-btn {
+    transition: all 0.2s;
+    border: 1px solid rgba(30, 136, 229, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #E3F2FD;
+  }
+  .app-icon-btn:hover {
+    background-color: #BBDEFB;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(30, 136, 229, 0.1);
+    border-color: rgba(30, 136, 229, 0.4);
+  }
+  .app-icon-btn i {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 8px;
+    color: #1E88E5;
+  }
+  .app-icon-btn span {
+    color: #0D47A1;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body class="bg-gray-50 min-h-[1024px]">
+  <div class="w-full max-w-[1440px] mx-auto flex flex-col min-h-[1024px]">
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-sm">
+      <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100">
+        <div class="flex items-center">
+          <div class="font-['Pacifico'] text-2xl text-primary mr-10">国兴集团</div>
+          <nav class="flex space-x-8">
+            <a href="#" class="nav-item text-gray-700 hover:text-primary font-medium">统一门户</a>
+            <a href="#" class="nav-item text-gray-700 hover:text-primary font-medium">数据分析</a>
+            <a href="#" class="nav-item text-gray-700 hover:text-primary font-medium">应用管理</a>
+            <a href="#" class="nav-item text-gray-700 hover:text-primary font-medium">信息管理</a>
+            <a href="#" class="nav-item text-gray-700 hover:text-primary font-medium">系统管理</a>
+          </nav>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <i class="fas fa-bell text-gray-500 text-lg"></i>
+            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-medium">周</div>
+        </div>
+      </div>
+      <div class="px-6 py-2 bg-blue-50 text-sm text-gray-600 flex items-center">
+        <i class="fas fa-bullhorn mr-2 text-primary"></i>
+        <div class="marquee flex-1 overflow-hidden">
+          <div class="whitespace-nowrap animate-marquee">
+            关于召开2025年第三季度经营分析会的通知 | 关于组织参加"数字化转型"专题培训的通知 | 2025年半年度绩效考核结果公示
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="flex flex-1">
+      <!-- 左侧菜单 -->
+      <aside class="w-64 bg-gray-100 p-4 flex flex-col">
+        <!-- 待办模块 -->
+        <div class="mb-6 bg-white rounded-lg p-4 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="module-title font-bold text-gray-700">待办</h3>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <a href="/flow-center?type=today" class="todo-item">
+              <div class="count">27</div>
+              <div class="label">今日待办</div>
+            </a>
+            <a href="/flow-center?type=initiated" class="todo-item">
+              <div class="count">9</div>
+              <div class="label">我发起的</div>
+            </a>
+            <a href="/flow-center?type=approved" class="todo-item">
+              <div class="count">45</div>
+              <div class="label">已审批</div>
+            </a>
+            <a href="/flow-center?type=followed" class="todo-item">
+              <div class="count">33</div>
+              <div class="label">我的关注</div>
+            </a>
+          </div>
+          <a href="/flow-center" class="flow-center-btn">
+            <i class="fas fa-tasks"></i>
+            <span>进入流程中心</span>
+          </a>
+        </div>
+        
+        <!-- 快捷入口模块 -->
+        <div class="mb-6 bg-white rounded-lg p-4 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="module-title font-bold text-gray-700">快捷入口</h3>
+            <a href="/quick-access" class="text-xs text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-umbrella-beach text-primary"></i>
+              <span class="text-xs">请假审批</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-hand-holding-usd text-primary"></i>
+              <span class="text-xs">保证金审批</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-file-upload text-primary"></i>
+              <span class="text-xs">文件发布</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-file-signature text-primary"></i>
+              <span class="text-xs">合同签约</span>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- 最近会议模块 -->
+        <div class="bg-white rounded-lg p-4 shadow-sm">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="module-title font-bold text-gray-700">最近会议</h3>
+            <a href="/meeting" class="text-xs text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+        </div>
+        <div class="space-y-3"> <!-- 纵向排列容器 -->
+            <!-- 会议卡片1 -->
+            <div class="flex items-center border border-gray-200 rounded-lg p-3">
+            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                <i class="fas fa-calendar-alt text-primary text-sm"></i> <!-- 改为日历图标 -->
+            </div>
+            <div>
+                <div class="text-primary font-medium text-sm">7/25周五 15:00</div>
+                <div class="text-xs text-gray-500 mb-1">会议通知</div>
+                <div class="text-sm font-medium">第三期"数字国兴"项目双周例会</div>
+            </div>
+            </div>
+            
+            <!-- 会议卡片2 -->
+            <div class="flex items-center border border-gray-200 rounded-lg p-3">
+            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                <i class="fas fa-calendar-alt text-primary text-sm"></i> <!-- 改为日历图标 -->
+            </div>
+            <div>
+                <div class="text-primary font-medium text-sm">7/15周二 14:30</div>
+                <div class="text-xs text-gray-500 mb-1">会议通知</div>
+                <div class="text-sm font-medium">会议申请-周杨-资管系统研讨会</div>
+            </div>
+            </div>
+            
+            <!-- 会议卡片3 -->
+            <div class="flex items-center border border-gray-200 rounded-lg p-3">
+            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                <i class="fas fa-calendar-alt text-primary text-sm"></i> <!-- 改为日历图标 -->
+            </div>
+            <div>
+                <div class="text-primary font-medium text-sm">7/11周五 08:30</div>
+                <div class="text-xs text-gray-500 mb-1">会议通知</div>
+                <div class="text-sm font-medium">数字国兴"第三期项目启动会</div>
+            </div>
+            </div>
+        </div>
+        </div>
+      </aside>
+      
+      <!-- 主内容区 -->
+      <main class="flex-1 p-6 bg-gray-50">
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">投资管理</h2>
+            <a href="#" class="text-sm text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-5 gap-5">
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-keyboard text-primary"></i>
+              <span class="text-xs">投资录入</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-project-diagram text-primary"></i>
+              <span class="text-xs">项目库</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-home text-primary"></i>
+              <span class="text-xs">产权维护</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-tv text-primary"></i>
+              <span class="text-xs">数据看板</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-chart-pie text-primary"></i>
+              <span class="text-xs">数据统计</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">融资管理</h2>
+            <a href="#" class="text-sm text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-5 gap-5">
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-wallet text-primary"></i>
+              <span class="text-xs">资金余额</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-coins text-primary"></i>
+              <span class="text-xs">融资放款</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-file-excel text-primary"></i>
+              <span class="text-xs">融资台账</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-chart-line text-primary"></i>
+              <span class="text-xs">本月融资</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">工程建设</h2>
+            <a href="#" class="text-sm text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-5 gap-5">
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-sitemap text-primary"></i>
+              <span class="text-xs">流程管理</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-hard-hat text-primary"></i>
+              <span class="text-xs">现场管理</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-video text-primary"></i>
+              <span class="text-xs">工地监控</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">综合管理</h2>
+            <a href="#" class="text-sm text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-5 gap-5">
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-exclamation-triangle text-primary"></i>
+              <span class="text-xs">应急管理</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-users text-primary"></i>
+              <span class="text-xs">人资管理</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-flag text-primary"></i>
+              <span class="text-xs">党群管理</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-balance-scale text-primary"></i>
+              <span class="text-xs">审计法务</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">经营管理</h2>
+            <a href="#" class="text-sm text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-5 gap-5">
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-landmark text-primary"></i>
+              <span class="text-xs">土地经营</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-building text-primary"></i>
+              <span class="text-xs">资产经营</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-tasks text-primary"></i>
+              <span class="text-xs">经营管理</span>
+            </div>
+            <div class="icon-btn bg-white rounded border border-gray-200">
+              <i class="fas fa-chart-pie text-primary"></i>
+              <span class="text-xs">数据运营</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 我的应用模块 - 淡蓝色主题 -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="my-apps-title text-lg font-bold text-gray-800">
+              <i class="fas fa-th-large text-primary"></i>
+              我的应用
+            </h2>
+            <a href="/my-apps" class="text-sm text-primary hover:underline">更多 <i class="fas fa-chevron-right ml-1"></i></a>
+          </div>
+          <div class="grid grid-cols-5 gap-5">
+            <!-- 安管通 -->
+            <div class="app-icon-btn">
+              <i class="fas fa-shield-alt"></i>
+              <span class="text-xs">安管通</span>
+            </div>
+            <!-- 智慧工地 -->
+            <div class="app-icon-btn">
+              <i class="fas fa-hard-hat"></i>
+              <span class="text-xs">智慧工地</span>
+            </div>
+            <!-- 土地管理系统 -->
+            <div class="app-icon-btn">
+              <i class="fas fa-map-marked-alt"></i>
+              <span class="text-xs">土地管理系统</span>
+            </div>
+            <!-- OA系统 -->
+            <div class="app-icon-btn">
+              <i class="fas fa-file-contract"></i>
+              <span class="text-xs">OA系统</span>
+            </div>
+            <!-- 云上砂石 -->
+            <div class="app-icon-btn">
+              <i class="fas fa-cloud"></i>
+              <span class="text-xs">云上砂石</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
