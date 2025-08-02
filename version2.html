@@ -55,61 +55,99 @@ tailwind.config = {
   background-color: #e5e7eb;
   border-radius: 3px;
 }
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 </style>
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
-  <!-- 顶部导航栏 -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white text-gray-800 shadow-md">
-    <div class="container mx-auto px-6 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-8">
-        <div class="text-xl font-bold">国兴集团</div>
-        <nav class="hidden md:flex space-x-6">
-          <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">统一门户</a>
-          <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">数据分析</a>
-          <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">应用管理</a>
-          <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">信息管理</a>
-          <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors">系统管理</a>
-        </nav>
-      </div>
-      <div class="flex items-center space-x-4">
-        <div class="relative">
-          <i class="fas fa-bell fa-icon text-gray-600 hover:text-gray-800 cursor-pointer"></i>
-          <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-medium">张</div>
-          <span class="hidden md:inline text-gray-800">张明远</span>
-          <i class="fas fa-chevron-down fa-icon text-sm text-gray-600"></i>
-        </div>
+<!-- 顶部导航栏 -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white text-gray-800 shadow-md">
+  <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <div class="text-xl font-bold flex items-center">
+        <span class="mr-2">国兴集团</span>
+        <a href="#" class="px-2 py-1 rounded-button hover:bg-gray-100 transition-colors text-sm">首页</a>
       </div>
     </div>
-  </header>
+    <div class="flex items-center space-x-4">
+      <!-- 添加的数据中心按钮 -->
+      <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors hidden md:block">数据中心</a>
+      
+      <div class="relative dropdown">
+        <i class="fas fa-cog fa-icon text-gray-600 hover:text-gray-800 cursor-pointer mr-3"></i>
+        <div class="dropdown-menu absolute hidden right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50">
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">应用管理</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">信息管理</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">系统管理</a>
+        </div>
+      </div>
+      <div class="relative">
+        <i class="fas fa-bell fa-icon text-gray-600 hover:text-gray-800 cursor-pointer"></i>
+        <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-medium">张</div>
+        <span class="hidden md:inline text-gray-800">张明远</span>
+        <i class="fas fa-chevron-down fa-icon text-sm text-gray-600"></i>
+      </div>
+    </div>
+  </div>
+</header>
   
   <!-- 主内容区 -->
   <main class="pt-16 pb-8 container mx-auto px-6">
     <div class="flex flex-col lg:flex-row gap-6">
-      <!-- 左侧面板 -->
+      <!-- 左侧面板 - 修改为我的应用 -->
       <div class="w-full lg:w-1/4 flex-shrink-0 space-y-6">
-        <!-- 日期和待办数据 -->
-        <div class="bg-white rounded-xl shadow-sm p-4">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">2025年7月29日 星期二</h2>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="bg-blue-50 p-3 rounded-lg">
-              <div class="text-sm text-gray-500 mb-1">今日待办</div>
-              <div class="text-2xl font-bold text-primary">27</div>
-            </div>
-            <div class="bg-purple-50 p-3 rounded-lg">
-              <div class="text-sm text-gray-500 mb-1">我发起的</div>
-              <div class="text-2xl font-bold text-secondary">9</div>
-            </div>
-            <div class="bg-green-50 p-3 rounded-lg">
-              <div class="text-sm text-gray-500 mb-1">已审批</div>
-              <div class="text-2xl font-bold text-green-600">45</div>
-            </div>
-            <div class="bg-yellow-50 p-3 rounded-lg">
-              <div class="text-sm text-gray-500 mb-1">我的关注</div>
-              <div class="text-2xl font-bold text-yellow-600">33</div>
-            </div>
+        <!-- 我的应用 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-800">我的应用</h3>
+            <a href="#" class="text-sm text-primary hover:underline flex items-center">
+              更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+            </a>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <!-- 第一行3个应用 -->
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mb-2">
+                <i class="fas fa-file-alt fa-icon"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">OA系统</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-purple-100 text-secondary flex items-center justify-center mb-2">
+                <i class="fas fa-building fa-icon"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">商业资产</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
+                <i class="fas fa-database fa-icon"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">数据通</span>
+            </button>
+            
+            <!-- 第二行3个应用 -->
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-2">
+                <i class="fas fa-shield-alt fa-icon"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">安管通</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-2">
+                <i class="fas fa-hard-hat fa-icon"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">智慧工地</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-2">
+                <i class="fas fa-mountain fa-icon"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">云上砂石</span>
+            </button>
           </div>
         </div>
         
@@ -151,7 +189,7 @@ tailwind.config = {
               更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
             </a>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-5">
             <div class="p-3 bg-blue-50 rounded-lg">
               <div class="text-sm font-medium text-gray-800">项目进度评审会</div>
               <div class="text-xs text-gray-500">今天 14:00 - 15:30 | 第三期"数字国兴"项目双周例会</div>
@@ -288,7 +326,14 @@ tailwind.config = {
               <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">28</div>
             </div>
             <div class="h-20 p-1">
-              <div class="h-full rounded-lg bg-primary/10 border border-primary flex flex-col items-center justify-start pt-1 text-sm font-medium text-primary">29</div>
+              <div class="h-full rounded-lg bg-primary/10 border border-primary flex flex-col items-center justify-start pt-1 text-sm font-medium text-primary">
+                29
+                <div class="flex items-center mt-1">
+                  <div class="w-2 h-2 rounded-full bg-red-500 mr-1"></div>
+                  <span class="text-xs text-red-600">今日待办</span>
+                </div>
+                <span class="text-xs font-medium text-red-500">17</span>
+              </div>
             </div>
             <div class="h-20 p-1">
               <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">30</div>
@@ -393,22 +438,22 @@ tailwind.config = {
                   </div>
                 </td>
               </tr>
-              <!-- <tr class="text-sm text-gray-700 hover:bg-gray-50">
+                            <tr class="text-sm text-gray-700 hover:bg-gray-50">
                 <td class="py-4 pl-4">
                   <div class="flex items-center">
-                    <div class="w-2 h-2 rounded-full bg-purple-500 mr-3"></div>
-                    <span>安全生产月度总结报告</span>
+                    <div class="w-2 h-2 rounded-full bg-red-500 mr-3"></div>
+                    <span>会议取消：第三期"数字国兴"项目双周例会....</span>
                   </div>
                 </td>
-                <td class="py-4">2025-07-27 14:05</td>
-                <td class="py-4">杨晓明</td>
+                <td class="py-4">2025-07-27 16:20</td>
+                <td class="py-4">林文静</td>
                 <td class="py-4 pr-4">
                   <div class="flex items-center space-x-3">
                     <button class="text-primary hover:text-primary/80">审批</button>
                     <button class="text-gray-500 hover:text-gray-700">详情</button>
                   </div>
                 </td>
-              </tr> -->
+              </tr>
             </tbody>
           </table>
         </div>
@@ -416,9 +461,19 @@ tailwind.config = {
       
       <!-- 右侧面板 -->
       <div class="w-full lg:w-1/4 flex-shrink-0 space-y-6">
+        <!-- 搜索框 -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <div class="relative">
+            <input type="text" placeholder="输入搜索业务应用..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+            <div class="absolute left-3 top-2.5 text-gray-400">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+        </div>
+        
         <!-- 投资 -->
         <div class="bg-white rounded-xl shadow-sm p-6">
-          <div class="flex justify-between items-center mb-6">
+          <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold text-gray-800">投资管理</h2>
             <a href="#" class="text-sm text-primary hover:underline flex items-center">
               更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
@@ -448,7 +503,7 @@ tailwind.config = {
 
         <!-- 融资 -->
         <div class="bg-white rounded-xl shadow-sm p-6">
-          <div class="flex justify-between items-center mb-6">
+          <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold text-gray-800">融资管理</h2>
             <a href="#" class="text-sm text-primary hover:underline flex items-center">
               更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
@@ -484,7 +539,7 @@ tailwind.config = {
 
         <!-- 建设 -->
         <div class="bg-white rounded-xl shadow-sm p-6">
-          <div class="flex justify-between items-center mb-6">
+          <div class="flex justify-between items-center mb-5">
             <h2 class="text-lg font-semibold text-gray-800">工程建设</h2>
             <a href="#" class="text-sm text-primary hover:underline flex items-center">
               更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
@@ -508,7 +563,7 @@ tailwind.config = {
 
         <!-- 管理 -->
         <div class="bg-white rounded-xl shadow-sm p-6">
-          <div class="flex justify-between items-center mb-6">
+          <div class="flex justify-between items-center mb-5">
             <h2 class="text-lg font-semibold text-gray-800">综合管理</h2>
             <a href="#" class="text-sm text-primary hover:underline flex items-center">
               更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
@@ -538,7 +593,7 @@ tailwind.config = {
 
         <!-- 经营 -->
         <div class="bg-white rounded-xl shadow-sm p-6">
-          <div class="flex justify-between items-center mb-6">
+          <div class="flex justify-between items-center mb-5">
             <h2 class="text-lg font-semibold text-gray-800">经营管理</h2>
             <a href="#" class="text-sm text-primary hover:underline flex items-center">
               更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
@@ -573,125 +628,23 @@ tailwind.config = {
         </div>
       </div>
     </div>
-    
-   <!-- 底部我的应用 - 按照图片分类展示 -->
-<div class="bg-white rounded-xl shadow-sm p-6 mt-6 w-full">
-  <div class="flex justify-between items-center mb-4">
-    <h3 class="text-lg font-medium text-gray-800">我的应用</h3>
-    <a href="#" class="text-sm text-primary hover:underline flex items-center">
-      更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
-    </a>
-  </div>
-  
-  <!-- 办公协作 -->
-  <div class="mb-6">
-  <div class="grid grid-cols-8 gap-8">
-    <!-- 办公协作 -->
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-blue-100 text-primary flex items-center justify-center mb-2">
-        <i class="fas fa-file-alt fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">OA系统</span>
-    </button>
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-purple-100 text-secondary flex items-center justify-center mb-2">
-        <i class="fas fa-building fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">商业资产管理系统</span>
-    </button>
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
-        <i class="fas fa-database fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">数据通</span>
-    </button>
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-2">
-        <i class="fas fa-users fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">人力资源管理</span>
-    </button>
-    
-    <!-- 综合管理 -->
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-2">
-        <i class="fas fa-shield-alt fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">安管通</span>
-    </button>
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-2">
-        <i class="fas fa-hard-hat fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">智慧工地</span>
-    </button>
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-blue-100 text-primary flex items-center justify-center mb-2">
-        <i class="fas fa-map-marked-alt fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">土地管理系统</span>
-    </button>
-    
-    <!-- 生产管理 -->
-    <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-2">
-        <i class="fas fa-mountain fa-icon"></i>
-      </div>
-      <span class="text-sm font-medium text-gray-700">云上砂石</span>
-    </button>
-  </div>
-</div>
-  
-  <!-- 综合管理 -->
-  <!-- <div class="mb-6">
-    <h4 class="text-md font-medium text-gray-700 mb-3">综合管理</h4>
-    <div class="grid grid-cols-3 gap-4">
-      <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-        <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-2">
-          <i class="fas fa-shield-alt fa-icon"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-700">安管通</span>
-      </button>
-      <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-        <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-2">
-          <i class="fas fa-hard-hat fa-icon"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-700">智慧工地</span>
-      </button>
-      <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-        <div class="w-12 h-12 rounded-full bg-blue-100 text-primary flex items-center justify-center mb-2">
-          <i class="fas fa-map-marked-alt fa-icon"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-700">土地管理系统</span>
-      </button>
-    </div>
-  </div> -->
-  
-  <!-- 生产管理 -->
-  <!-- <div>
-    <h4 class="text-md font-medium text-gray-700 mb-3">生产管理</h4>
-    <div class="grid grid-cols-3 gap-4">
-      <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-        <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-2">
-          <i class="fas fa-mountain fa-icon"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-700">云上砂石</span>
-      </button>
-      <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-        <div class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center mb-2">
-          <i class="fas fa-umbrella-beach fa-icon"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-700">大明山智慧旅游</span>
-      </button>
-      <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
-        <div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
-          <i class="fas fa-tractor fa-icon"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-700">农水系统</span>
-      </button>
-    </div>
-  </div> -->
-</div>
   </main>
+
+  <!-- AI机器人图标和智能问数按钮 -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <div class="flex flex-col items-center">
+      <div class="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center mb-2 cursor-pointer hover:shadow-xl transition-shadow">
+        <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center">
+          <div class="w-6 h-3 flex justify-between">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+      </div>
+      <button class="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
+        智能问数
+      </button>
+    </div>
+  </div>
 </body>
 </html>
