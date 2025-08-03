@@ -71,7 +71,7 @@ tailwind.config = {
       </div>
     </div>
     <div class="flex items-center space-x-4">
-      <!-- 添加的数据中心按钮111 -->
+      <!-- 添加的数据中心按钮 -->
       <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors hidden md:block">数据中心</a>
       
       <div class="relative dropdown">
@@ -464,7 +464,7 @@ tailwind.config = {
         <!-- 搜索框 -->
         <div class="bg-white rounded-xl shadow-sm p-4">
           <div class="relative">
-            <input type="text" placeholder="输入搜索业务应用..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+            <input type="text" placeholder="请输入关键字搜索..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
             <div class="absolute left-3 top-2.5 text-gray-400">
               <i class="fas fa-search"></i>
             </div>
@@ -592,7 +592,24 @@ tailwind.config = {
         </div>
 
         <!-- 经营 -->
-        <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="bg-white rounded-xl shadow-sm p-6 relative">
+          <!-- 智能机器人图标 -->
+          <div class="absolute -top-6 -right-6 z-50">
+            <div class="flex flex-col items-center">
+              <div class="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center mb-2 cursor-pointer hover:shadow-xl transition-shadow">
+                <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                  <div class="w-6 h-3 flex justify-between">
+                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                  </div>
+                </div>
+              </div>
+              <button class="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
+                智能问数
+              </button>
+            </div>
+          </div>
+          
           <div class="flex justify-between items-center mb-5">
             <h2 class="text-lg font-semibold text-gray-800">经营管理</h2>
             <a href="#" class="text-sm text-primary hover:underline flex items-center">
@@ -629,22 +646,5 @@ tailwind.config = {
       </div>
     </div>
   </main>
-
-  <!-- AI机器人图标和智能问数按钮 -->
-  <div class="fixed bottom-6 right-6 z-50">
-    <div class="flex flex-col items-center">
-      <div class="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center mb-2 cursor-pointer hover:shadow-xl transition-shadow">
-        <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center">
-          <div class="w-6 h-3 flex justify-between">
-            <div class="w-2 h-2 rounded-full bg-white"></div>
-            <div class="w-2 h-2 rounded-full bg-white"></div>
-          </div>
-        </div>
-      </div>
-      <button class="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
-        智能问数
-      </button>
-    </div>
-  </div>
 </body>
 </html>
