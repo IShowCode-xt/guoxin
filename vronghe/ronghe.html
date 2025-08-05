@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企业管理系统</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#2563eb',
+        secondary: '#7c3aed',
+      },
+      borderRadius: {
+        'none': '0px',
+        'sm': '2px',
+        DEFAULT: '4px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '20px',
+        '3xl': '24px',
+        'full': '9999px',
+        'button': '4px'
+      }
+    }
+  }
+}
+</script>
+<style>
+.fa-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb #f3f4f6;
+}
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 3px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 3px;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+</style>
+</head>
+<body class="min-h-screen bg-gray-50 font-sans">
+<!-- 顶部导航栏 -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white text-gray-800 shadow-md">
+  <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <div class="text-xl font-bold flex items-center">
+     <img src="./img/logo.png" alt="国兴集团" class="h-11 mr-4">
+    <a href="#" class="px-2 py-1 relative group">
+      <span class="text-blue-400 text-sm">首页</span>
+      <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400 transform scale-x-100"></span>
+    </a>
+  </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <a href="#" class="px-3 py-2 rounded-button hover:bg-gray-100 transition-colors hidden md:block">数据中心</a>
+      
+      <div class="relative dropdown">
+        <i class="fas fa-cog fa-icon text-gray-600 hover:text-gray-800 cursor-pointer mr-3"></i>
+        <div class="dropdown-menu absolute hidden right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50">
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">应用管理</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">信息管理</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">系统管理</a>
+        </div>
+      </div>
+      <div class="relative">
+        <i class="fas fa-bell fa-icon text-gray-600 hover:text-gray-800 cursor-pointer"></i>
+        <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-medium">张</div>
+        <span class="hidden md:inline text-white-800">张明远</span>
+        <i class="fas fa-chevron-down fa-icon text-sm text-gray-600"></i>
+      </div>
+    </div>
+  </div>
+</header>
+  
+<!-- 公告栏 -->
+<div class="fixed top-16 left-0 right-0 z-40 bg-blue-50 border-b border-gray-200 py-1 h-8">
+  <div class="container mx-auto px-6 h-full">
+    <div class="flex items-center h-full space-x-2 overflow-x-auto scroll-container">
+      <div class="flex-shrink-0 text-blue-600">
+        <i class="fas fa-bullhorn text-sm"></i>
+      </div>
+      <div class="flex space-x-4 h-full items-center">
+        <a href="#" class="text-xs text-gray-9hover:text-primary whitespace-nowrap">
+          关于召开2025年第三季度经营分析会的通知
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- 主内容区 -->
+  <main class="pt-28 pb-8 container mx-auto px-6">
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- 左侧面板 -->
+      <div class="w-full lg:w-1/4 flex-shrink-0 space-y-6">
+        <!-- 我的应用 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-800">我的应用</h3>
+            <a href="#" class="text-sm text-primary hover:underline flex items-center">
+              更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+            </a>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                <i class="fas fa-file-alt text-blue-600"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">OA系统</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-2">
+                <i class="fas fa-map-marked-alt text-purple-600"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">土地管理系统</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-2">
+                <i class="fas fa-tint text-green-600"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">农水系统</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mb-2">
+                <i class="fas fa-shield-alt text-red-600"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">安管通</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mb-2">
+                <i class="fas fa-hard-hat text-indigo-600"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700">智慧工地</span>
+            </button>
+            <button class="p-3 rounded-button bg-gray-50 hover:bg-gray-100 flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mb-2">
+                <i class="fas fa-mountain text-orange-600"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-7">云上砂石</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 快捷入口 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-800">快捷入口</h3>
+            <a href="#" class="text-sm text-primary hover:underline flex items-center">
+              更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+            </a>
+          </div>
+          <div class="space-y-3">
+            <button class="w-full p-3 rounded-button bg-blue-50 hover:bg-blue-100 flex items-center">
+              <div class="w-8 h-8 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-3">
+                <i class="fas fa-umbrella-beach text-primary"></i>
+              </div>
+              <span class="flex-1 text-sm font-medium text-gray-700">请假审批</span>
+            </button>
+            <button class="w-full p-3 rounded-button bg-purple-50 hover:bg-purple-100 flex items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-100 text-secondary flex items-center justify-center mr-3">
+                <i class="fas fa-hand-holding-usd text-secondary"></i>
+              </div>
+              <span class="flex-1 text-sm font-medium text-gray-700">保证金审批</span>
+            </button>
+            <button class="w-full p-3 rounded-button bg-green-50 hover:bg-green-100 flex items-center">
+              <div class="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                <i class="fas fa-file-upload text-green-600"></i>
+              </div>
+              <span class="flex-1 text-sm font-medium text-gray-700">文件发布</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 最近会议通知 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-800">会议通知</h3>
+            <a href="#" class="text-sm text-primary hover:underline flex items-center">
+              更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+            </a>
+          </div>
+          <div class="space-y-5">
+            <div class="p-3 bg-blue-50 rounded-lg">
+              <div class="text-sm font-medium text-gray-800">项目进度评审会</div>
+              <div class="text-xs text-gray-500">今天 14:00 - 15:30 | 第三期"数字国兴"项目双周例会</div>
+            </div>
+            <div class="p-3 bg-blue-50 rounded-lg">
+              <div class="text-sm font-medium text-gray-800">资管系统研讨会</div>
+              <div class="text-xs text-gray-500">明天 09:30 - 11:00 | 会议申请-周杨-资管系统研讨会</div>
+            </div>
+            <div class="p-3 bg-blue-50 rounded-lg">
+              <div class="text-sm font-medium text-gray-800">项目启动会</div>
+              <div class="text-xs text-gray-500">7月31日 10:00 - 11:30 | 数字国兴"第三期项目启动会</div>
+            </div>
+              <div class="p-3 bg-blue-50 rounded-lg">
+              <div class="text-sm font-medium text-gray-800">项目启动会</div>
+              <div class="text-xs text-gray-500">7月31日 10:00 - 11:30 | 数字国兴"第三期项目启动会</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 中间区域 -->
+      <div class="w-full lg:w-2/4 flex-grow space-y-6">
+        <!-- 日历 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-800">2025年7月</h2>
+            </div>
+            <div class="flex space-x-2">
+              <button class="w-8 h-8 rounded-button bg-gray-100 hover:bg-gray-200 flex items-center justify-center">
+                <i class="fas fa-chevron-left fa-icon text-sm"></i>
+              </button>
+              <button class="px-3 py-1 rounded-button bg-gray-100 hover:bg-gray-200 text-sm">今天</button>
+              <button class="w-8 h-8 rounded-button bg-gray-100 hover:bg-gray-200 flex items-center justify-center">
+                 <i class="fas fa-chevron-right fa-icon text-sm"></i>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-7 gap-1 mb-2">
+            <div class="text-center text-sm font-medium text-gray-500 py-2">日</div>
+            <div class="text-center text-sm font-medium text-gray-500 py-2">一</div>
+            <div class="text-center text-sm font-medium text-gray-500 py-2">二</div>
+            <div class="text-center text-sm font-medium text-gray-500 py-2">三</div>
+            <div class="text-center text-sm font-medium text-gray-500 py-2">四</div>
+            <div class="text-center text-sm font-medium text-gray-500 py-2">五</div>
+            <div class="text-center text-sm font-medium text-gray-500 py-2">六</div>
+          </div>
+          <div class="grid grid-cols-7 gap-1">
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm text-gray-400">30</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">1</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">2</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">3</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">4</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">5</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">6</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">7</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">8</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">9</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">10</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">11</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">12</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">13</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">14</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">15</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">16</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">17</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">18</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">19</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">20</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">21</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">22</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">23</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">24</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">25</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">26</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">27</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">28</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg bg-primary/10 border border-primary flex flex-col items-center justify-start pt-1 text-sm font-medium text-primary">
+                29
+                <div class="flex items-center mt-1">
+                  <div class="w-2 h-2 rounded-full bg-red-500 mr-1"></div>
+                  <span class="text-xs text-red-600">今日待办</span>
+                </div>
+                <span class="text-xs font-medium text-red-500">17</span>
+              </div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">30</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm">31</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm text-gray-400">1</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm text-gray-400">2</div>
+            </div>
+            <div class="h-20 p-1">
+              <div class="h-full rounded-lg flex flex-col items-center justify-start pt-1 text-sm text-gray-400">3</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 待处理事项 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="border-b border-gray-200 mb-6">
+            <nav class="flex -mb-px">
+              <button class="px-6 py-3 border-b-2 border-primary text-primary font-medium">待我处理</button>
+              <button class="px-6 py-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">我发起的</button>
+              <button class="px-6 py-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">抄送我的</button>
+              <button class="px-6 py-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">我的办结</button>
+              <button class="px-6 py-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">我的关注</button>
+                 <!-- 添加的更多按钮 -->
+      <div class="ml-auto">
+        <a href="#" class="text-sm text-primary hover:underline flex items-center px-6 py-3">
+          更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+        </a>
+      </div>
+            </nav>
+          </div>
+
+          
+
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-sm font-medium text-gray-500 border-b border-gray-200">
+                <th class="pb-3 pl-4">事项名称</th>
+                <th class="pb-3">日期</th>
+                <th class="pb-3">发起人</th>
+                <th class="pb-3 pr-4">操作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr class="text-sm text-gray-700 hover:bg-gray-50">
+                <td class="py-4 pl-4">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-red-500 mr-3"></div>
+                    <span>2025年度预算调整申请</span>
+                  </div>
+                </td>
+                <td class="py-4">2025-07-29 10:30</td>
+                <td class="py-4">林文静</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center space-x-3">
+                    <button class="text-primary hover:text-primary/80">审批</button>
+                    <button class="text-gray-500 hover:text-gray-700">详情</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="text-sm text-gray-700 hover:bg-gray-50">
+                <td class="py-4 pl-4">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-yellow-500 mr-3"></div>
+                    <span>智慧工地系统升级方案评审</span>
+                  </div>
+                </td>
+                <td class="py-4">2025-07-28 15:45</td>
+                <td class="py-4">郑海涛</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center space-x-3">
+                    <button class="text-primary hover:text-primary/80">审批</button>
+                    <button class="text-gray-500 hover:text-gray-700">详情
+                  </div>
+                </td>
+              </tr>
+              <tr class="text-sm text-gray-700 hover:bg-gray-50">
+                <td class="py-4 pl-4">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-green-500 mr-3"></div>
+                    <span>新项目立项审批流程</span>
+                  </div>
+                </td>
+                <td class="py-4">2025-07-28 09:15</td>
+                <td class="py-4">刘建华</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center space-x-3">
+                    <button class="text-primary hover:text-primary/80">审批</button>
+                    <button class="text-gray-500 hover:text-gray-700">详情</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="text-sm text-gray-700 hover:bg-gray-50">
+                <td class="py-4 pl-4">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-blue-500 mr-3"></div>
+                    <span>设备采购合同审核</span>
+                  </div>
+                </td>
+                <td class="py-4">2025-07-27 16:20</td>
+                <td class="py-4">周思敏</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center space-x-3">
+                    <button class="text-primary hover:text-primary/80">审批</button>
+                    <button class="text-gray-500 hover:text-gray-700">详情</button>
+                  </div>
+                </td>
+              </tr>
+                            <tr class="text-sm text-gray-700 hover:bg-gray-50">
+                <td class="py-4 pl-4">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-red-500 mr-3"></div>
+                    <span>会议取消：第三期"数字国兴"项目双周例会....</span>
+                  </div>
+                </td>
+                <td class="py-4">2025-07-27 16:20</td>
+                <td class="py-4">林文静</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center space-x-3">
+                    <button class="text-primary hover:text-primary/80">审批</button>
+                    <button class="text-gray-500 hover:text-gray-700">详情</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- 右侧面板 -->
+      <div class="w-full lg:w-1/4 flex-shrink-0 space-y-6">
+        <!-- 搜索框 -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <div class="relative">
+            <input type="text" placeholder="请输入关键字搜索..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+            <div class="absolute left-3 top-2.5 text-gray-400">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+        </div>
+        
+       <!-- 业务管理模块 - 修改为图片中的选项卡式卡片布局 -->
+<div class="bg-white rounded-xl shadow-sm p-6">
+  <!-- 模块标题 - 添加了flex布局和更多按钮 -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-bold text-gray-800">业务管理</h2>
+    <a href="#" class="text-sm text-primary hover:underline flex items-center">
+      更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+    </a>
+  </div>
+  
+<!-- 选项卡导航 - 增加按钮间距 -->
+<div class="flex flex-nowrap gap-1 mb-6 overflow-x-auto pb-2">
+  <button class="px-4 py-2 text-sm rounded-lg bg-primary text-white font-medium whitespace-nowrap hover:bg-primary/90 transition-colors">投资</button>
+  <button class="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 font-medium whitespace-nowrap hover:bg-gray-200 transition-colors">融资</button>
+  <button class="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 font-medium whitespace-nowrap hover:bg-gray-200 transition-colors">建设</button>
+  <button class="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 font-medium whitespace-nowrap hover:bg-gray-200 transition-colors">管理</button>
+  <button class="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 font-medium whitespace-nowrap hover:bg-gray-200 transition-colors">经营</button>
+</div>
+  
+  <!-- 投资管理内容 -->
+  <div class="grid grid-cols-2 gap-4">
+    <!-- 投资录入卡片 -->
+    <div class="p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer">
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-3">
+          <i class="fas fa-keyboard text-blue-600 text-xl"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">投资录入</span>
+      </div>
+    </div>
+    
+    <!-- 产权维护卡片 -->
+    <div class="p-4 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors cursor-pointer">
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mb-3">
+          <i class="fas fa-building text-purple-600 text-xl"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">产权维护</span>
+      </div>
+    </div>
+    
+    <!-- 项目库卡片 -->
+    <div class="p-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors cursor-pointer">
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mb-3">
+          <i class="fas fa-seedling text-green-600 text-xl"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">项目库</span>
+      </div>
+    </div>
+    
+    <!-- 数据统计卡片 -->
+    <div class="p-4 rounded-lg bg-yellow-50 hover:bg-yellow-100 transition-colors cursor-pointer">
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg bg-yellow-100 flex items-center justify-center mb-3">
+          <i class="fas fa-chart-bar text-yellow-600 text-xl"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">数据统计</span>
+      </div>
+    </div>
+    
+    <!-- 数据看板卡片 -->
+    <div class="p-4 rounded-lg bg-indigo-50 hover:bg-indigo-100 transition-colors cursor-pointer">
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-3">
+          <i class="fas fa-tachometer-alt text-indigo-600 text-xl"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">数据看板</span>
+      </div>
+    </div>
+        <!-- 数据看板卡片 -->
+    <div class="p-4 rounded-lg bg-red-50 hover:bg-red-100 transition-colors cursor-pointer">
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg bg-red-100 flex items-center justify-center mb-3">
+          <i class="fas fa-tasks fa-icon text-red-600 text-xl"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">进度管理</span>
+      </div>
+    </div>
+  </div>
+</div>
+        
+<!-- 政策引领模块 - 修改为可切换卡片 -->
+<div class="bg-white rounded-xl shadow-sm p-6 relative">
+  <!-- 智能机器人图标 -->
+  <div class="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/4 z-50">
+    <div class="flex flex-col items-center">
+      <div class="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center mb-2 cursor-pointer hover:shadow-xl transition-shadow">
+        <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center">
+          <div class="w-6 h-3 flex justify-between">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+      </div>
+      <button class="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
+        智能问数
+      </button>
+    </div>
+  </div>
+  
+  <!-- 模块标题和选项卡 -->
+  <div class="flex justify-between items-center mb-4">
+    <div class="flex flex-nowrap gap-1 overflow-x-auto pb-2">
+      <button class="tab-button px-3 py-1 text-sm rounded-lg bg-primary text-white font-medium whitespace-nowrap" data-tab="industry">产业政策</button>
+      <button class="tab-button px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-700 font-medium whitespace-nowrap" data-tab="regulations">制度汇编</button>
+      <button class="tab-button px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-700 font-medium whitespace-nowrap" data-tab="legal">普法宣传</button>
+    </div>
+    <a href="#" class="text-sm text-primary hover:underline flex items-center ml-2">
+      更多 <i class="fas fa-chevron-right fa-icon text-xs ml-1"></i>
+    </a>
+  </div>
+  
+  <!-- 产业政策内容 - 默认显示 -->
+  <div class="tab-content" id="industry-content">
+    <div class="space-y-4">
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-file-alt text-blue-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">《数字中国建设整体布局规划》解读</h3>
+          <p class="text-xs text-gray-500">2025-07-20</p>
+        </div>
+      </div>
+      
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-bullhorn text-green-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">国有企业数字化转型最新政策</h3>
+          <p class="text-xs text-gray-500">2025-07-15</p>
+        </div>
+      </div>
+      
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-building text-purple-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">十四五规划中期评估要点</h3>
+          <p class="text-xs text-gray-500">2025-07-10</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 制度汇编内容 - 默认隐藏 -->
+  <div class="tab-content hidden" id="regulations-content">
+    <div class="space-y-4">
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-book text-red-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">公司财务管理制度2025版</h3>
+          <p class="text-xs text-gray-500">2025-06-28</p>
+        </div>
+      </div>
+      
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-clipboard-list text-yellow-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">项目审批流程规范</h3>
+          <p class="text-xs text-gray-500">2025-06-15</p>
+        </div>
+      </div>
+      
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-users text-indigo-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">人力资源管理办法</h3>
+          <p class="text-xs text-gray-500">2025-05-30</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 普法宣传内容 - 默认隐藏 -->
+  <div class="tab-content hidden" id="legal-content">
+    <div class="space-y-4">
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-gavel text-orange-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">新《公司法》解读与实务</h3>
+          <p class="text-xs text-gray-500">2025-07-18</p>
+        </div>
+      </div>
+      
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-balance-scale text-teal-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">合同法律风险防范指南</h3>
+          <p class="text-xs text-gray-500">2025-07-05</p>
+        </div>
+      </div>
+      
+      <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <i class="fas fa-shield-alt text-pink-600"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-800">数据安全法合规要点</h3>
+          <p class="text-xs text-gray-500">2025-06-22</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+  </div>
+</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
